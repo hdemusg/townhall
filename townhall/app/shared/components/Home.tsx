@@ -1,5 +1,6 @@
 // Import necessary dependencies
 import { useState } from "react";
+import { Link } from "@remix-run/react";
 
 // Your existing imports remain unchanged
 
@@ -50,10 +51,20 @@ export default function Home() {
     topic: "",
   });
 
+  // State to handle the selected post
+  const [selectedPost, setSelectedPost] = useState(null);
+
   // Handler for clicking on a search result
   const handleResultClick = (postId) => {
-    // You can define the behavior when a result is clicked
-    console.log(`Clicked on result with ID: ${postId}`);
+    // Find the selected post based on the postId
+    const post = posts.find((p) => p.id === postId);
+    // Set the selected post to display detailed information
+    setSelectedPost(post);
+  };
+
+  // Handler for closing the detailed information
+  const handleCloseDetail = () => {
+    setSelectedPost(null);
   };
 
   // Handler for submitting search on Enter key
@@ -252,6 +263,27 @@ export default function Home() {
           </button>
         ))}
       </div>
+
+      {/* Detailed Information */}
+      {selectedPost && (
+        <div style={{ margin: "20px" }}>
+          <h2>{selectedPost.problem}</h2>
+          <p>Magnitude: {selectedPost.magnitude}</p>
+          <p>Category: {selectedPost.category}</p>
+          {/* Additional information or stories can be displayed here */}
+          <button onClick={handleCloseDetail}>Close</button>
+        </div>
+      )}
+
+      {/* Add Proposal Button */}
+      {selectedPost && (
+        <Link
+          to={`/add-proposal/${selectedPost.id}`}
+          style={{ fontSize: "1rem", color: "#007BFF" }}
+        >
+          Add Proposal
+        </Link>
+      )}
     </div>
   );
 }
