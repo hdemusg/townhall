@@ -10,7 +10,14 @@ export default function Auth() {
     return (
         <div className="content">
           <div className="authform">
-            Auth
+            Login
+            <form method="post">
+                <input type="radio"
+                name="loginType"
+                value="login"
+                >
+                </input>
+            </form>
           </div>
         </div>
         
