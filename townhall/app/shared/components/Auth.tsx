@@ -32,7 +32,7 @@ export default function Auth() {
                 <FormField htmlFor="password" type="password" label="Password" value={formData.password}
                 onChange={e => handleInputChange(e, 'password')}></FormField>
                 </div>
-                <button>
+                <button type="submit">
                     Log In
                 </button>
             </form>

@@ -16,7 +16,7 @@ model User {
   updatedAt DateTime @updatedAt
   email     String   @unique
   password  String
-  dob       DateTime
-  ethnicity String
-  gender    String
+  dob       DateTime @default("not specified")
+  ethnicity String   @default("not specified")
+  gender    String   @default("not specified")
 }
