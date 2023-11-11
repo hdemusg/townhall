@@ -32,6 +32,14 @@
     padding: 20px;
     margin-top: 100px;
     font-size: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    flex-direction: column;
 }
 
 .content {
@@ -44,8 +52,27 @@
 
 form {
     padding: 20px;
-    margin-top: 10px;
+    display: flex;
     background-color: black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    color: white;
+    background-color: black;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.form-field {
+    background-color: black;
+    justify-content: center;
 }
 
 * {

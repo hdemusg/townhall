@@ -10,13 +10,20 @@ export default function Auth() {
     return (
         <div className="content">
           <div className="authform">
-            Login
+            TOWNHALL
             <form method="post">
-                <input type="radio"
-                name="loginType"
-                value="login"
-                >
+                <div className="form-field">
+                <label htmlFor="username">Username</label>
+                <input type="text" id="username"></input>
+                </div>
+                <div className="form-field">
+                <label htmlFor="username">Password</label>
+                <input type="text" id="password">
                 </input>
+                </div>
+                <button>
+                    Log In
+                </button>
             </form>
           </div>
         </div>
