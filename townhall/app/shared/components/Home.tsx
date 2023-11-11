@@ -56,6 +56,12 @@ export default function Home() {
     console.log(`Clicked on result with ID: ${postId}`);
   };
 
+  // Handler for submitting search on Enter key
+  const handleSearchSubmit = () => {
+    // You can perform the search logic here
+    console.log(`Search submitted: ${searchInput}`);
+  };
+
   // Filter posts based on search input and selected toggles
   const filteredPosts = posts.filter((post) => {
     const includesSearch = post.problem
@@ -86,13 +92,36 @@ export default function Home() {
         }}
       >
         {/* Search bar */}
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          style={{ padding: "10px", fontSize: "1rem", marginBottom: "10px" }}
-        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            style={{
+              padding: "10px",
+              fontSize: "1rem",
+              marginBottom: "10px",
+              marginRight: "10px",
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearchSubmit();
+              }
+            }}
+          />
+          <button
+            onClick={handleSearchSubmit}
+            style={{
+              padding: "10px",
+              fontSize: "1rem",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }}
+          >
+            Search
+          </button>
+        </div>
 
         {/* Toggles */}
         <div
@@ -200,12 +229,16 @@ export default function Home() {
               transition: "background-color 0.3s, transform 0.3s", // Add transition effect
             }}
             onMouseOver={(e) => {
-              e.target.style.backgroundColor = "#eee"; // Hover effect
-              e.target.style.transform = "scale(1.1)"; // Increase size on hover
+              if (e.currentTarget instanceof HTMLButtonElement) {
+                e.currentTarget.style.backgroundColor = "#eee"; // Hover effect
+                e.currentTarget.style.transform = "scale(1.1)"; // Increase size on hover
+              }
             }}
             onMouseOut={(e) => {
-              e.target.style.backgroundColor = "inherit"; // Reset background on hover out
-              e.target.style.transform = "scale(1)"; // Reset size on hover out
+              if (e.currentTarget instanceof HTMLButtonElement) {
+                e.currentTarget.style.backgroundColor = "inherit"; // Reset background on hover out
+                e.currentTarget.style.transform = "scale(1)"; // Reset size on hover out
+              }
             }}
           >
             {post.magnitude} - {post.problem}{" "}
