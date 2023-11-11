@@ -1,11 +1,10 @@
-import type {LinksFunction} from "@remix-run/node"
-
-import stylesUrl from "~/styles/index.css"
-
-export const links: LinksFunction = () => [
-  {rel: "stylesheet", href: stylesUrl},
-];
+import Navbar from '../shared/components/Navbar'
+import Home from '../shared/components/Home'
 
 export default function IndexRoute() {
-  return <div>Welcome to Townhall</div>;
+  return (<>
+    <Navbar />
+    <Home />
+  </>
+  );
 }

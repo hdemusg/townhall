@@ -1,11 +1,4 @@
-import type { LinksFunction } from "@remix-run/node";
 import { Link, Outlet } from "@remix-run/react";
-
-import stylesUrl from "~/styles/problems.css";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesUrl },
-];
 
 export default function ProblemsRoute() {
   return (
@@ -18,8 +11,7 @@ export default function ProblemsRoute() {
               title="Remix Jokes"
               aria-label="Remix Jokes"
             >
-              <span className="logo">🤪</span>
-              <span className="logo-medium">J🤪KES</span>
+              <span className="logo-medium">JOKES</span>
             </Link>
           </h1>
         </div>

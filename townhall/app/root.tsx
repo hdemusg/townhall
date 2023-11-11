@@ -3,10 +3,10 @@ import type { LinksFunction } from "@remix-run/node";
 
 import globalLargeStylesUrl from "~/styles/global-large.css";
 import globalMediumStylesUrl from "~/styles/global-medium.css";
-import globalStylesUrl from "~/styles/global.css";
+import stylesUrl from "~/styles/townhall.css";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: globalStylesUrl },
+  { rel: "stylesheet", href: stylesUrl },
   {
     rel: "stylesheet",
     href: globalMediumStylesUrl,
