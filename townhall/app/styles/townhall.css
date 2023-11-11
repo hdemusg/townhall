@@ -82,3 +82,47 @@ button {
     margin: 0px;
     background-color: white;
 }
+.header {
+    background-color: #00689D;
+    color: white;
+    height: 36px;
+    margin: 0px;
+    padding: 10px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name {
+    background-color: #00689D;
+    color: white;
+    text-decoration-line: none;
+}
+
+.auth {
+    color: white;
+    background-color: #00689D;
+    border-color: white;
+    border-width: 1px;
+    font-weight: 200;
+    text-decoration-line: none;
+}
+
+.center-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    background-color: #00689D;
+    margin: 0 10px;
+    text-decoration-line: none;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0px;
+    background-color: white;
+}
