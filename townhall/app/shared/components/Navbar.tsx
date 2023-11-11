@@ -12,7 +12,7 @@ export default function Navbar() {
     return (
         <div className="header">
             <Link className="name" to="/">TOWNHALL</Link>
-            <Link className="auth" to="auth"> Log In</Link>
+            <Link className="auth" to="/auth"> Log In</Link>
         </div>
     )
 }

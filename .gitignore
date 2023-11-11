@@ -1,2 +1,4 @@
-.env
+townhall/.env
+townhall/node_modules
+townhall/.cache
 node_modules
