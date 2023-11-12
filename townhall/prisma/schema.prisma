@@ -1,5 +1,5 @@
 // This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// learn more about it in the docs: 
 
 generator client {
   provider = "prisma-client-js"
@@ -16,7 +16,14 @@ model User {
   updatedAt DateTime @updatedAt
   email     String   @unique
   password  String
-  dob       DateTime @default("not specified")
+  dob       DateTime
   ethnicity String   @default("not specified")
   gender    String   @default("not specified")
+}
+
+model Problem {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  magnitude Int
+  problem   String
+  category  String
 }

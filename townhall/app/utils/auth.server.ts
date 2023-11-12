@@ -44,7 +44,7 @@ export async function register(user: AuthForm) {
     )
   }
   console.log('success')
-  return createUserSession(newUser.id, '/');
+  return createUserSession(newUser.id, '/problems');
 }
 
 export async function login(u: string, p: string) {
@@ -60,6 +60,6 @@ export async function login(u: string, p: string) {
         return json({ error: `Incorrect login` }, { status: 400 })
       else {
 
-        return createUserSession(user.id, '/');
+        return createUserSession(user.id, '/problems');
       }
 }

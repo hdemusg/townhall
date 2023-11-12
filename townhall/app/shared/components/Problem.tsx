@@ -17,7 +17,7 @@ export default function EnterProblems() {
   return (
     <div style={{ textAlign: "center", padding: "50px" }}>
       {/* Header */}
-      <h1 style={{ marginBottom: "20px" }}>Enter your problems</h1>
+      <div className="h1" style={{ marginBottom: "20px" }}>Enter your problems</div>
 
       {/* Search bar and Enter button */}
       <div

@@ -1,8 +1,9 @@
 import Navbar from '../shared/components/Navbar'
-import Auth from '../shared/components/Auth'
+import { useState } from 'react'
 import { ActionFunction, json } from '@remix-run/node'
 import { validateEmail, validatePassword } from '~/utils/validators.server'
 import { login, register } from '~/utils/auth.server'
+import { FormField } from '../shared/components/FormField';
 
 export const action: ActionFunction = async ({ request }) => {
     const form = await request.formData()
@@ -25,9 +26,37 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
 export default function AuthRoute() {
-  return (<>
+
+    const [formData, setFormData] = useState({
+        username: '',
+        password: ''
+    })
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, field: string) => {
+        setFormData(form => ({ ...form, [field]: event.target.value }))
+      }
+  return (
+    <>
     <Navbar />
-    <Auth />
+    <div className="content">
+          <div className="authform">
+            TOWNHALL
+            <form method="post">
+                <div className="form-field">
+                <FormField htmlFor="username" type="username" label="Username" value={formData.username}
+                onChange={e => handleInputChange(e, 'username')}></FormField>
+                </div>
+                <div className="form-field">
+                <FormField htmlFor="password" type="password" label="Password" value={formData.password}
+                onChange={e => handleInputChange(e, 'password')}></FormField>
+                </div>
+                <button type="submit">
+                    Log In
+                </button>
+            </form>
+          </div>
+        </div>
   </>
-  );
+  )
 }
+  

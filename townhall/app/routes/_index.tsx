@@ -1,10 +1,12 @@
 import Navbar from '../shared/components/Navbar'
-import Home from '../shared/components/Home'
+import Welcome from '../shared/components/Welcome'
+import { Outlet } from '@remix-run/react';
 
 export default function IndexRoute() {
   return (<>
     <Navbar />
-    <Home />
+    <Outlet />
+    <Welcome />
   </>
   );
 }

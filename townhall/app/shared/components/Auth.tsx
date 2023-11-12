@@ -2,13 +2,15 @@ import type { LinksFunction } from "@remix-run/node";
 import { useState } from 'react'
 import { FormField } from './FormField'
 
+import { ActionFunction } from '@remix-run/node'
+
 import stylesUrl from "~/styles/townhall.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesUrl},
 ];
 
-export default function Auth() {
+export default function Auth(action: ActionFunction) {
 
     const [formData, setFormData] = useState({
         username: '',
@@ -32,7 +34,7 @@ export default function Auth() {
                 <FormField htmlFor="password" type="password" label="Password" value={formData.password}
                 onChange={e => handleInputChange(e, 'password')}></FormField>
                 </div>
-                <button type="submit">
+                <button type="submit" onSubmit={() => {action}}>
                     Log In
                 </button>
             </form>

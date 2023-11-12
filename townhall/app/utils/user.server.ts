@@ -3,6 +3,7 @@ import type { AuthForm } from './types.server'
 import { prisma } from './prisma.server'
 
 export const createUser = async (user: AuthForm) => {
+  console.log('creating user')
   const passwordHash = await bcrypt.hash(user.password, 10)
   const newUser = await prisma.user.create({
     data: {

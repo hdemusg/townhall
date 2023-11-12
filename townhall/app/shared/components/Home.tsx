@@ -1,45 +1,12 @@
 // Import necessary dependencies
 import { useState } from "react";
+import { Problem } from '@prisma/client'
 import { Link } from "@remix-run/react";
 
-// Your existing imports remain unchanged
+import { useNavigate } from '@remix-run/react'
 
 // Modify the Home component to include the updated layout
-export default function Home() {
-  // Dummy data for posts
-  const posts = [
-    {
-      id: 1,
-      magnitude: 1,
-      problem: "Lack of Gender Equality in Education",
-      category: "Education",
-    },
-    {
-      id: 2,
-      magnitude: 2,
-      problem: "Lack of Healthy Food Options",
-      category: "Food",
-    },
-    {
-      id: 3,
-      magnitude: 3,
-      problem: "Excess Office Space",
-      category: "Environment",
-    },
-    {
-      id: 4,
-      magnitude: 4,
-      problem: "Lack of Healthy Food Options",
-      category: "Food",
-    },
-    {
-      id: 5,
-      magnitude: 5,
-      problem: "Lack of Healthy Food Options",
-      category: "Food",
-    },
-    // Add more posts as needed
-  ];
+export default function Home({ problems }: { problems: Problem[] }) {
 
   // State to handle search input
   const [searchInput, setSearchInput] = useState("");
@@ -51,47 +18,27 @@ export default function Home() {
     topic: "",
   });
 
-  // State to handle the selected post
-  const [selectedPost, setSelectedPost] = useState(null);
+  const navigate = useNavigate()
 
-  // Handler for clicking on a search result
-  const handleResultClick = (postId) => {
-    // Find the selected post based on the postId
-    const post = posts.find((p) => p.id === postId);
-    // Set the selected post to display detailed information
-    setSelectedPost(post);
-  };
+  // const [selectedProb, setSelectedProb] = useState(null);
 
-  // Handler for closing the detailed information
+  /*
   const handleCloseDetail = () => {
-    setSelectedPost(null);
+    setSelectedProb(null);
   };
+  */
 
-  // Handler for submitting search on Enter key
   const handleSearchSubmit = () => {
     // You can perform the search logic here
     console.log(`Search submitted: ${searchInput}`);
   };
 
-  // Filter posts based on search input and selected toggles
-  const filteredPosts = posts.filter((post) => {
-    const includesSearch = post.problem
-      .toLowerCase()
-      .includes(searchInput.toLowerCase());
-    const includesScope =
-      !selectedToggles.scope || post.category === selectedToggles.scope;
-    const includesIdentity =
-      !selectedToggles.identity || post.category === selectedToggles.identity;
-    const includesTopic =
-      !selectedToggles.topic || post.category === selectedToggles.topic;
-
-    return includesSearch && includesScope && includesIdentity && includesTopic;
-  });
+  const [filteredProbs, setFilteredProbs] = useState(problems);
 
   return (
     <div style={{ textAlign: "center" }}>
       {/* Header */}
-      <h1>Find problems to find solutions</h1>
+      <div className="h1">Find problems to find solutions.</div>
 
       {/* Search bar and Toggles container */}
       <div
@@ -103,17 +50,18 @@ export default function Home() {
         }}
       >
         {/* Search bar */}
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div 
+            className="filter">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="keywords"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             style={{
               padding: "10px",
               fontSize: "1rem",
               marginBottom: "10px",
-              marginRight: "10px",
+              marginRight: "10px"
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -135,17 +83,13 @@ export default function Home() {
         </div>
 
         {/* Toggles */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "10px",
-          }}
-        >
+        <div className="toggleBar">
           {/* Scope Dropdown */}
-          <label style={{ marginRight: "10px" }}>
+          <div className="dropdownMenu">
+          <label className="dropdownLabel" />
             Scope:
             <select
+            className="select"
               value={selectedToggles.scope}
               onChange={(e) =>
                 setSelectedToggles((prevToggles) => ({
@@ -161,12 +105,15 @@ export default function Home() {
                 </option>
               ))}
             </select>
-          </label>
+          </div>
+          
 
           {/* Identity Dropdown */}
-          <label style={{ marginRight: "10px" }}>
+          <div className="dropdownMenu">
+          <label className="dropdownLabel" />
             Identity:
             <select
+            className="select"
               value={selectedToggles.identity}
               onChange={(e) =>
                 setSelectedToggles((prevToggles) => ({
@@ -191,19 +138,15 @@ export default function Home() {
                 </option>
               ))}
             </select>
-          </label>
+          </div>
+          
 
           {/* Topic Dropdown */}
-          <label>
+          <label className="dropdownLabel">
             Topic:
             <select
+            className="select"
               value={selectedToggles.topic}
-              onChange={(e) =>
-                setSelectedToggles((prevToggles) => ({
-                  ...prevToggles,
-                  topic: e.target.value,
-                }))
-              }
             >
               <option value="">All</option>
               {["Environment", "Food", "Health", "Water", "Education"].map(
@@ -226,64 +169,12 @@ export default function Home() {
           alignItems: "center",
         }}
       >
-        {filteredPosts.map((post) => (
-          <button
-            key={post.id}
-            onClick={() => handleResultClick(post.id)}
-            style={{
-              padding: "15px",
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-              marginBottom: "10px",
-              width: "300px", // Set a fixed width for consistency
-              cursor: "pointer", // Make the button visually appear clickable
-              transition: "background-color 0.3s, transform 0.3s", // Add transition effect
-            }}
-            onMouseOver={(e) => {
-              if (e.currentTarget instanceof HTMLButtonElement) {
-                e.currentTarget.style.backgroundColor = "#eee"; // Hover effect
-                e.currentTarget.style.transform = "scale(1.1)"; // Increase size on hover
-              }
-            }}
-            onMouseOut={(e) => {
-              if (e.currentTarget instanceof HTMLButtonElement) {
-                e.currentTarget.style.backgroundColor = "inherit"; // Reset background on hover out
-                e.currentTarget.style.transform = "scale(1)"; // Reset size on hover out
-              }
-            }}
-          >
-            {post.magnitude} - {post.problem}{" "}
-            <span
-              role="img"
-              aria-label="thumbs-up"
-              style={{ fontSize: "1.5rem", marginLeft: "5px" }}
-            >
-              👍
-            </span>
-          </button>
+         {problems == null ? "None" : problems.map((prob) => (
+            <div key={prob.id} className="problemCard" onClick={(e) => navigate(`/problems/${prob.id}`)}>
+                  {prob.problem}
+           </div>
         ))}
       </div>
-
-      {/* Detailed Information */}
-      {selectedPost && (
-        <div style={{ margin: "20px" }}>
-          <h2>{selectedPost.problem}</h2>
-          <p>Magnitude: {selectedPost.magnitude}</p>
-          <p>Category: {selectedPost.category}</p>
-          {/* Additional information or stories can be displayed here */}
-          <button onClick={handleCloseDetail}>Close</button>
-        </div>
-      )}
-
-      {/* Add Proposal Button */}
-      {selectedPost && (
-        <Link
-          to={`/add-proposal/${selectedPost.id}`}
-          style={{ fontSize: "1rem", color: "#007BFF" }}
-        >
-          Add Proposal
-        </Link>
-      )}
     </div>
   );
 }
